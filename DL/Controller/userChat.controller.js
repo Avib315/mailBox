@@ -13,7 +13,6 @@ async function readByFlags(id, flags = [], populate = {}) {
     if (populate.chats) data = await data.populate('chats.chat')
     if (populate.users) data = await data.populate({ path: 'chats.chat.to', select: "fullName avatar" })
     // if (populate.users) data = await data.populate('chats.chat.to');
-
     return data.toObject()
 }
 
