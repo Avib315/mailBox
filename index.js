@@ -5,7 +5,7 @@ const express = require("express"),
 require("dotenv").config()
 app.use(CORS());
 app.use(express.json());
-app.use("/email", require("./routes/email.router.js"));
+app.use("/email", require("./routes/chat.router.js"));
 app.use("/user", require("./routes/user.router.js"));
 require("./DL/db.js").connect()
 app.listen(PORT, () => {

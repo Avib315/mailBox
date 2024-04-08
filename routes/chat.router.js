@@ -1,12 +1,12 @@
 const express = require('express'),
     router = express.Router();
 
-const emailService = require('../BL/email.service')
+const chatService = require('../BL/chat.service')
 const { auth } = require('../middlewares/auth')
 
 router.get('/', async (req, res) => {
     try {
-        let result = await emailService.getAllRecieved()
+        let result = await chatService.getInbox()
         res.send(result)
     }
     catch (err) {
@@ -14,9 +14,9 @@ router.get('/', async (req, res) => {
     }
 
 })
-router.post('/:emailId', async (req, res) => {
+router.post('/:chatId', async (req, res) => {
     try {
-        let result = await emailService.addNewMessageToEmail(req.params.emailId, req.body)
+        let result = await chatService.addNewMessageTochat(req.params.chatId, req.body)
         res.send(result)
     }
     catch (err) {
