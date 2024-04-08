@@ -5,7 +5,7 @@ const create = async (data) => {
     return await chatModel.create(data)
 }
 const read = async (filter, isPopulate) => {
-    return await chatModel.find(filter).populate(isPopulate ? 'msg' : '')
+    return await chatModel.find(filter).populate(isPopulate && { path: "msg.from" ,select:"fullName avatar"})
 }
 const readOne = async (filter) => {
     return await chatModel.findOne(filter)

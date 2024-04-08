@@ -1,11 +1,14 @@
 const userController = require('./Controller/user.controller')
 const chatController = require('./Controller/chat.controller')
+const userChatController = require('./Controller/userChat.controller')
+const userChatService = require('../BL/userChat.service')
 const userModel = require('./models/user.model')
 const chatModel = require('./models/chat.model')
 
 
 
 async function go() {
+    return
     require('dotenv').config()
     require('./db').connect()
     await userModel.collection.drop()
@@ -129,5 +132,10 @@ async function go() {
     console.log("###########  END  ##########");
 
 }
-
-module.exports = {go}
+async function test (){
+    require('dotenv').config()
+    require('./db').connect()
+   const chats = await userChatService.getInbox("6613ad2b810646d14ad0ba80")
+    console.log(chats);
+}
+module.exports = {test}

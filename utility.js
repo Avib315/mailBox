@@ -1,13 +1,12 @@
-const Flags = {
-    inbox: "isRecieved",
-    Favorite: "isFavorite",
-    send: "isSent",
-    draft: "isDraft",
-    read: "isRead",
-    deleted: "isDeleted",
-    labels: "labels",
+module.exports = {
+    Flags: {
+        Sent: "isSent",
+        Inbox: "isRecieved",
+        Favorite: "isFavorite",
+        Deleted: "isDeleted",
+        Draft: "isDraft",
+        Read: "isRead",
+        NotRead: { "isRead": false },
+    },
 
 }
-
-
-module.exports = { Flags }
