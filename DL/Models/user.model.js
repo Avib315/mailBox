@@ -34,21 +34,19 @@ const userSchema = new mongoose.Schema({
     isActive: {
         type: Boolean,
         default: true
-    }
+}
 })
 
 const userModel = mongoose.model('user', userSchema)
 
 module.exports = userModel
 
-async function go() {
-    require('dotenv').config()
-    require('../db').connect()
-    let chats2 = await userModel.findOne({ _id: "660d26b92a155d99889d3942" }).populate('chats.chat')
-    let { chats } = await chats2.populate('chats.chat.msg')//.populate('chats.chat.to');
-    // console.log(chats[0].chat);
-    let res = chats.filter(c => c.isRecieved)
-    console.log(res);
+// async function go() {
+//     require('dotenv').config()
+//     require('../db').connect()
+//     let chats2 = await userModel.findOne({ _id: "660d26b92a155d99889d3942" }).populate('chats.chat')
+//     let { chats } = await chats2.populate('chats.chat.msg')//.populate('chats.chat.to');
+//     let res = chats.filter(c => c.isRecieved)
 
-}
+// }
 // go()

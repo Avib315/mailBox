@@ -3,7 +3,7 @@ const express = require("express"),
     service = require("../BL/user.service")
 
 
-router.post("/", async (req, res) => {
+router.post("/register", async (req, res) => {
     res.send(await service.createUser(req.body))
 })
 router.get("/", async (req, res) => {

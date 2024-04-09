@@ -9,7 +9,7 @@ async function readByFlags(id, flags = [], populate = {}) {
             let [[k, v]] = Object.entries(f)
             return c[k] == v
         }
-        return c[f]
+        return c[f] 
     }))
     if (populate.chats) data = await data.populate('chats.chat')
     if (populate.users) data = await data.populate({ path: 'chats.chat.members', select: "fullName avatar" })

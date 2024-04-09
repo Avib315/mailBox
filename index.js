@@ -1,9 +1,7 @@
 const express = require("express"),
     app = express(),
     CORS = require("cors"),
-    PORT = 3001,
-    test = require("./DL/test_data");
-// test.test();
+    PORT = 3001
 require("dotenv").config()
 require("./DL/db.js").connect()
 
