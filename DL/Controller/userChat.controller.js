@@ -1,5 +1,5 @@
-const userModel = require('../models/user.model')
-
+const userModel = require('../models/user.model');
+const chatModel = require("../models/chat.model")
 async function readByFlags(id, flags = [], populate = {}) {
 
     let data = await userModel.findOne({ _id: id, isActive: true })
@@ -9,16 +9,14 @@ async function readByFlags(id, flags = [], populate = {}) {
             let [[k, v]] = Object.entries(f)
             return c[k] == v
         }
-        return c[f] 
+        return c[f]
     }))
     if (populate.chats) data = await data.populate('chats.chat')
     if (populate.users) data = await data.populate({ path: 'chats.chat.members', select: "fullName avatar" })
-
-    // if (populate.users) data = await data.populate('chats.chat.to');
-    
     return data.toObject()
 }
-
-
-
-module.exports = { readByFlags }
+async function readByCheatId(id) {
+    const data = await chatModel.findOne({ _id: id }).select("-members");
+    return data;
+}
+module.exports = { readByFlags, readByCheatId }

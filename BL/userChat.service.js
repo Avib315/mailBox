@@ -1,4 +1,4 @@
-const userChatController = require('../DL/Controller/userChat.controller')
+const userChatController = require('../DL/controller/userChat.controller')
 const userService = require('./user.service')
 // const { Flags } = require('../utility')
 

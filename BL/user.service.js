@@ -1,4 +1,4 @@
-const controller = require("../DL/Controller/user.controller")
+const controller = require("../DL/controller/user.controller")
 const Utiles = {
 
 }
