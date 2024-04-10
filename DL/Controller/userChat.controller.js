@@ -18,4 +18,21 @@ async function readByCheatId(id) {
     const data = await chatModel.findOne({ _id: id }).populate({ path: "msg.from", select: "fullName avatar" });
     return data;
 }
-module.exports = { readByFlags, readByCheatId }
+async function updateChatStatus(userId, chatId, status , statusValue) {
+    try {
+        const updatedUser = await userModel.findOneAndUpdate(
+            { _id: userId, "chats._id": chatId },
+            { $set: { [`chats.$.${status}`]: statusValue } },
+            { new: true }
+        );
+        if (!updatedUser) {
+            throw new Error('User or chat not found');
+        }
+
+        console.log(`Updated chat ${chatId} read status to ${status} for user ${userId}`);
+        return true;
+    } catch (error) {
+        console.error(`Error updating chat read status: ${error.message}`);
+    }
+}
+module.exports = { readByFlags, readByCheatId, updateChatStatus }

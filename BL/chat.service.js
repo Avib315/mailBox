@@ -10,8 +10,10 @@ const getManyChats = async (filter) => {
     return chatController.read(filter);
 
 }
-const updateChat = async (id , data) => {
-const result = await chatController.update(id , data)
+const updateChat = async (id, data) => {
+    const result = await chatController.update(id, data)
+    return result
+
 }
 
 

@@ -3,10 +3,10 @@ const userService = require('./user.service')
 // const { Flags } = require('../utility')
 
 const getByFlags = async (userId, flags, poplate = { chats: true, users: true }, input = "") => {
-    let {chats} = await userChatController.readByFlags(userId, flags, poplate);
-    if(input){
-        return chats.filter(chat => 
-            chat?.chat?.members?.some(member => 
+    let { chats } = await userChatController.readByFlags(userId, flags, poplate);
+    if (input) {
+        return chats.filter(chat =>
+            chat?.chat?.members?.some(member =>
                 member?.fullName?.toLowerCase().includes(input.toLowerCase())
             )
         );
@@ -29,5 +29,8 @@ const updateChatsStatus = async (userId, chatId, data) => {
     }
     return null
 }
-
-module.exports = { updateChatsStatus, getByFlags, getChatsById }
+const updateChatStatus = async (userId, chatId, status = "isRead", statusaVlue = true) => {
+    const result = await userChatController.updateChatStatus(userId, chatId, status, statusaVlue)
+    return result;
+}
+module.exports = { updateChatsStatus, getByFlags, getChatsById, updateChatStatus }

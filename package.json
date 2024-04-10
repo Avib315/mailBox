@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon ./DL/test_data.js",
+    "test": "node ./DL/test_data.js",
     "start": "nodemon index.js",
     "dev": "nodemon index.js"
   },
