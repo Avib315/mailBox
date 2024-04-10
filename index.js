@@ -7,7 +7,7 @@ require("./DL/db.js").connect()
 
 app.use(CORS());
 app.use(express.json());
-app.use("/email", require("./routes/chat.router.js"));
+app.use("/chats", require("./routes/chat.router.js"));
 app.use("/user", require("./routes/user.router.js"));
 app.use("/userchats", require("./routes/userChat.router.js"));
 app.listen(PORT, () => {

@@ -3,20 +3,13 @@ const express = require('express'),
 
 const chatService = require('../BL/chat.service')
 const { auth } = require('../middlewares/auth')
-
-router.get('/', async (req, res) => {
+router.put('/sendmessag', async (req, res) => {
     try {
-        let result = await chatService.getInbox()
-        res.send(result)
-    }
-    catch (err) {
-        res.status(400).send(err.msg || err.message || "wrong")
-    }
+        const { id, msg } = req.body
 
-})
-router.post('/:chatId', async (req, res) => {
-    try {
-        let result = await chatService.addNewMessageTochat(req.params.chatId, req.body)
+            console.log(msg);
+            console.log(id);
+        const result = await chatService.updateChat(id, msg)
         res.send(result)
     }
     catch (err) {

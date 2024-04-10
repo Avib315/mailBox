@@ -10,12 +10,12 @@ const getManyChats = async (filter) => {
     return chatController.read(filter);
 
 }
-const updateChats = async () => {
-
+const updateChat = async (id , data) => {
+const result = await chatController.update(id , data)
 }
 
 
-module.exports = { creatChat, getChat, getManyChats, updateChats }
+module.exports = { creatChat, getChat, getManyChats, updateChat }
 
 
 

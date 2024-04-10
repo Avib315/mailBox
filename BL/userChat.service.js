@@ -2,9 +2,24 @@ const userChatController = require('../DL/controller/userChat.controller')
 const userService = require('./user.service')
 // const { Flags } = require('../utility')
 
-const getByFlags = async (userId, flags, poplate = { chats: true, users: true }) => {
-    let user  = await userChatController.readByFlags(userId, flags, poplate);
-    return user.chats
+const getByFlags = async (userId, flags, poplate = { chats: true, users: true }, input = "") => {
+    let {chats} = await userChatController.readByFlags(userId, flags, poplate);
+    if(input){
+        return chats.filter(chat => 
+            chat?.chat?.members?.some(member => 
+                member?.fullName?.toLowerCase().includes(input.toLowerCase())
+            )
+        );
+    }
+
+    return chats
+}
+const getChatsById = async (id) => {
+    const chats = await userChatController.readByCheatId(id);
+    if (chats) {
+        return chats;
+    }
+    return {}
 }
 const updateChatsStatus = async (userId, chatId, data) => {
     const user = await userService.getUser({ _id: userId, emails: { $elemMatch: { chat: chatId } } }, true)
@@ -15,4 +30,4 @@ const updateChatsStatus = async (userId, chatId, data) => {
     return null
 }
 
-module.exports = { updateChatsStatus, getByFlags }
+module.exports = { updateChatsStatus, getByFlags, getChatsById }

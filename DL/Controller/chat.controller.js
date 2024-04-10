@@ -10,8 +10,9 @@ const read = async (filter, isPopulate) => {
 const readOne = async (filter) => {
     return await chatModel.findOne(filter)
 }
-const update = async (id, data) => {
-    // return await chatModel.findOneAndUpdate({_id:id}, data,{new : true})
+const update = async (id, newMsg) => {
+    const data = await readOne({_id:id})
+    data?.msg?.push(newMsg)
     return await chatModel.findByIdAndUpdate(id, data, { new: true })
 }
 const del = async (id) => {
