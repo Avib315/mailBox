@@ -8,14 +8,30 @@ async function create(data) {
 async function read(filter) {
     return await userModel.find({ ...filter, isActive: true })
 }
-async function readOne(filter, populate={}) {
+async function readOne(filter, populate = {}, selectPassword = false) {
+    try {
+        let query = userModel.findOne({ ...filter, isActive: true });
 
-    let data = await userModel.findOne({ ...filter, isActive: true })
-    if(populate.chats) data=await data.populate('chats.chat')
-    if(populate.users) data=await data.populate('chats.chat.to')
-    
-    return data//.toObject()
+        if (selectPassword) {
+            query = query.select("+password");
+        }
+
+        let data = await query.exec();
+
+        if (populate.chats) {
+            await data.populate('chats.chat').execPopulate();
+        }
+        if (populate.users) {
+            await data.populate('chats.chat.to').execPopulate();
+        }
+
+        return data;
+    } catch (error) {
+        console.error("Error during readOne:", error);
+        throw error; // Rethrow the error for higher-level handling
+    }
 }
+
 async function update(id, data) {
     // return await userModel.findOneAndUpdate({_id:id}, data,{new : true})
     return await userModel.findByIdAndUpdate(id, data, { new: true })

@@ -9,8 +9,9 @@ router.post("/register", async (req, res) => {
 router.get("/", async (req, res) => {
     res.send(await service.getUser())
 })
-router.get("/email", async (req, res) => {
-    res.send("Hello World")
+router.post("/login", async (req, res) => {
+    const isLogin = await service.login(req.body)
+    res.send(isLogin).status(200)
     // res.send(await service.getUser())
 })
 module.exports = router

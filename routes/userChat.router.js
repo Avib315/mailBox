@@ -13,4 +13,14 @@ router.post("/getchatsbyid", async (req, res) => {
     const cheat = await service.getChatsById(chatId)
     res.send(cheat)
 })
+router.put("/readchat", async (req, res) => {
+    const { chatId, userId } = req.body;
+    const isUpdate = await service.updateChatStatus(userId, chatId)
+    res.send(isUpdate)
+})
+router.put("/favoritchst", async (req, res) => {
+    const { chatId, userId, statusaVlue } = req.body;
+    const isUpdate = await service.updateChatStatus(userId, chatId, "isFavorite", statusaVlue)
+    res.send(isUpdate)
+})
 module.exports = router 
